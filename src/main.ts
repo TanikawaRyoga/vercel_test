@@ -86,6 +86,23 @@ const moonData = [
     createMoon(5, jupiter, 45, 0.003),
 ];
 
+
+window.addEventListener('mousemove', (event) => {
+    mouseX = (event.clientX / window.innerWidth) * 2 - 1;
+    mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
+    targetRotation.y = mouseX * Math.PI;
+    targetRotation.x = mouseY * Math.PI * 0.5;
+});
+
+// タッチ操作を追加
+window.addEventListener('touchmove', (event) => {
+    const touch = event.touches[0];
+    mouseX = (touch.clientX / window.innerWidth) * 2 - 1;
+    mouseY = -(touch.clientY / window.innerHeight) * 2 + 1;
+    targetRotation.y = mouseX * Math.PI;
+    targetRotation.x = mouseY * Math.PI * 0.5;
+}, { passive: true });
+
 moonData.forEach(moon => {
     scene.add(moon.mesh);
     moonMeshes.push(moon);
